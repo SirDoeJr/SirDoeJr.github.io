@@ -1,6 +1,6 @@
 <?php
 // Replace with your own API key
-$api_key = "YOUR_API_KEY";
+$api_key = "9fadbd1d-dffd-4c9d-ac76-d1e830068324";
 
 // Get the player's username from the POST request
 $username = $_POST["username"];
