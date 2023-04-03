@@ -15,6 +15,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     "Authorization: $api_key"
 ));
+curl_setopt($ch, CURLOPT_POST, true);
 
 // Execute the request and decode the response
 $response = curl_exec($ch);
