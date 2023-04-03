@@ -1,55 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Fortnite Tracker API</title>
-</head>
-<body>
-	<form method="get">
-		<label for="username">Enter a Fortnite username:</label>
-		<input type="text" id="username" name="username">
-		<button type="submit">Submit</button>
-	</form>
+<?php
+// Replace with your own API key
+$api_key = "9fadbd1d-dffd-4c9d-ac76-d1e830068324";
 
-	<?php
-		$api_key = 'c24c53c9-ceae-4ef4-9a6a-fe38e5555301';
-		$username = $_GET['username'];
-		$url = "https://api.fortnitetracker.com/v1/profile/all/{$username}";
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-			'TRN-Api-Key: c24c53c9-ceae-4ef4-9a6a-fe38e5555301'
-		));
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$response = curl_exec($ch);
-		curl_close($ch);
-		$data = json_decode($response);
-		if (isset($data->error)) {
-			echo '<p>There was an error retrieving the account information.</p>';
-		} else {
-			$account_id = $data[0]->accountId;
-			$username = $data[0]->epicUserHandle;
-			$platform = $data[0]->platformNameLong;
-			$picture_url = $data[0]->avatar;
-			$favorite_games = $data[0]->favoriteMode;
-			$library_games = $data[0]->played;
-			echo '<h1>Fortnite Tracker API Results</h1>';
-			echo "<img src='{$picture_url}' alt='Profile picture'>";
-			echo "<p>Account ID: {$account_id}</p>";
-			echo "<p>Username: {$username}</p>";
-			echo "<p>Favorite Games: {$favorite_games}</p>";
-			echo '<ul>';
-			foreach ($data[0]->stats->favorites as $favorite) {
-				echo "<li>{$favorite->metadata->name} - {$favorite->value}</li>";
-			}
-			echo '</ul>';
-			echo "<p>Library Games: {$library_games}</p>";
-			echo '<ul>';
-			foreach ($data[0]->stats->playtime as $game) {
-				echo "<li>{$game->metadata->name} - {$game->value}</li>";
-			}
-			echo '</ul>';
-		}
-	?>
-</body>
-</html>
+// Get the player's name from the request parameter
+$username = $_GET["username"];
 
+// Set up the API request URL
+$url = "https://fortnite-api.com/v1/stats/br/v2?name=$username";
+
+// Set up cURL to make the API request
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+  "Authorization: $api_key"
+));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// Send the API request and get the response
+$response = curl_exec($ch);
+curl_close($ch);
+
+// Parse the JSON response into a PHP object
+$data = json_decode($response);
+
+// Check if there was an error retrieving the player's stats
+if (isset($data->error)) {
+  echo "There was an error retrieving the player's stats.";
+} else {
+  // Extract the player's epic ID from the response
+  $epic_id = $data->data->account->id;
+
+  // Display the player's epic ID
+  echo "Player $username has Epic ID $epic_id.";
+}
+?>
