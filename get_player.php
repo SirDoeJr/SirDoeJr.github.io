@@ -1,6 +1,6 @@
 <?php
 // Replace with your own API key
-$api_key = "9fadbd1d-dffd-4c9d-ac76-d1e830068324";
+$api_key = " 9fadbd1d-dffd-4c9d-ac76-d1e830068324";
 
 // Get the player's username from the POST request
 $username = $_POST["username"];
@@ -15,6 +15,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     "Authorization: $api_key"
 ));
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
 // Execute the request and decode the response
 $response = curl_exec($ch);
@@ -46,3 +47,4 @@ if ($data->status == 404) {
 // Close the cURL session
 curl_close($ch);
 ?>
+
