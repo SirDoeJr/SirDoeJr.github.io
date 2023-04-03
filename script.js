@@ -1,15 +1,23 @@
-function getEpicId() {
-  var apiKey = '9fadbd1d-dffd-4c9d-ac76-d1e830068324'; // Replace with your API key
-  var username = document.getElementById('username').value;
-  var url = 'https://fortnite-api.com/v2/users/id?username=' + username;
-  fetch(url, {headers: {'Authorization': apiKey}})
-    .then(response => response.json())
-    .then(data => {
-      if (data.status === 200) {
-        var epicId = data.data.accountId;
-        document.getElementById('epic-id').innerHTML = 'Epic ID: ' + epicId;
+const form = document.querySelector('form');
+const username = document.querySelector('#username');
+const results = document.querySelector('#results');
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  
+  const xhr = new XMLHttpRequest();
+  const url = `search.php?username=${username.value}`;
+
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        results.innerHTML = xhr.responseText;
       } else {
-        document.getElementById('epic-id').innerHTML = 'Error retrieving Epic ID';
+        results.innerHTML = `Error: ${xhr.status} ${xhr.statusText}`;
       }
-    });
-}
+    }
+  }
+
+  xhr.open('GET', url);
+  xhr.send();
+});
