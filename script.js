@@ -1,17 +1,15 @@
-$(document).ready(function() {
-	$('form').submit(function(event) {
-		event.preventDefault();
-		var username = $('#username').val();
-		$.ajax({
-			url: 'get_stats.php',
-			type: 'GET',
-			data: {username: username},
-			success: function(data) {
-				$('#stats-container').html(data);
-			},
-			error: function() {
-				$('#stats-container').html('<p>There was an error retrieving the account information.</p>');
-			}
-		});
-	});
-});
+function getEpicId() {
+  var apiKey = '9fadbd1d-dffd-4c9d-ac76-d1e830068324'; // Replace with your API key
+  var username = document.getElementById('username').value;
+  var url = 'https://fortnite-api.com/v2/users/id?username=' + username;
+  fetch(url, {headers: {'Authorization': apiKey}})
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 200) {
+        var epicId = data.data.accountId;
+        document.getElementById('epic-id').innerHTML = 'Epic ID: ' + epicId;
+      } else {
+        document.getElementById('epic-id').innerHTML = 'Error retrieving Epic ID';
+      }
+    });
+}
