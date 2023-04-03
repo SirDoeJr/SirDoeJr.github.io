@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Chicagos Epic Id Puller</title>
+    <meta charset="UTF-8">
+    <title>Fortnite Username Search</title>
   </head>
   <body>
-    <h1>Fortnite API Example</h1>
-    <input type="text" id="username" placeholder="Enter Epic username">
-    <button onclick="getEpicId()">Get Epic ID</button>
-    <div id="epic-id"></div>
+    <h1>Fortnite Username Search</h1>
+    <form>
+      <label for="username">Enter your Fortnite username:</label>
+      <input type="text" id="username" name="username">
+      <button type="submit" id="submit">Search</button>
+    </form>
+    <div id="results"></div>
     <script src="script.js"></script>
   </body>
 </html>
