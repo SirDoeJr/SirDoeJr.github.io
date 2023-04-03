@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title>Fortnite Username Search</title>
-  </head>
-  <body>
-    <h1>Fortnite Username Search</h1>
-    <form>
-      <label for="username">Enter your Fortnite username:</label>
-      <input type="text" id="username" name="username">
-      <button type="submit" id="submit">Search</button>
+    <title>Fortnite Player Lookup</title>
+</head>
+<body>
+    <h1>Fortnite Player Lookup</h1>
+    <form action="get_player.php" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <input type="submit" value="Lookup">
     </form>
-    <div id="results"></div>
-    <script src="script.js"></script>
-  </body>
+</body>
 </html>
