@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>epic id</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="script.js"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-	<h1>Fortnite Tracker</h1>
-	<p>Enter your Fortnite username to see your stats:</p>
-	<form>
-		<label for="username">Username:</label>
-		<input type="text" name="username" id="username">
-		<input type="submit" value="Submit">
-	</form>
-	<div id="stats-container"></div>
-</body>
+  <head>
+    <title>Fortnite API Example</title>
+  </head>
+  <body>
+    <h1>Fortnite API Example</h1>
+    <input type="text" id="username" placeholder="Enter Epic username">
+    <button onclick="getEpicId()">Get Epic ID</button>
+    <div id="epic-id"></div>
+    <script src="script.js"></script>
+  </body>
 </html>
