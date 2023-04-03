@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fortnite Stats</title>
+	<style>
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+			box-sizing: border-box;
+			text-align: center;
+		}
+
+		input[type="text"] {
+			padding: 10px;
+			font-size: 16px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			width: 100%;
+			max-width: 400px;
+		}
+
+		input[type="submit"] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 16px;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #45a049;
+		}
+
+		.account-info {
+			margin-top: 20px;
+			background-color: #f2f2f2;
+			padding: 20px;
+			border-radius: 4px;
+		}
+
+		.profile-picture {
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+		}
+
+		.account-id, .username, .favorite-games, .library-games {
+			margin-top: 10px;
+		}
+
+		.favorite-games-list, .library-games-list {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.favorite-games-list li, .library-games-list li {
+			margin: 10px;
+			flex-basis: 150px;
+			flex-grow: 1;
+			text-align: center;
+		}
+
+		.library-games-list img {
+			max-width: 100%;
+			height: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Fortnite Stats</h1>
+		<form method="get" action="">
+			<label for="username">Enter your Fortnite username:</label>
+			<br>
+			<input type="text" id="username" name="username" required>
+			<br><br>
+			<input type="submit" value="Get Stats">
+		</form>
+
+		<?php
+		if (isset($_GET['username'])) {
+		  // Replace <YOUR_API_KEY> with your actual Fortnite Tracker API key
+		  $api_key = 'c24c53c9-ceae-4ef4-9a6a-fe38e5555301';
+		  $username = $_GET['username'];
+		  $url = "https://api.fortnitetracker.com/v1/profile/all/{$username}";
+
+		  $ch = curl_init();
+		  curl_setopt($ch, CURLOPT_URL, $url);
+		  curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+		    'TRN-Api-Key: ' . $api_key
+		  ));
+		  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		  $response = curl_exec($ch);
+		  curl_close($ch);
+
+		  $data = json_decode($response);
+
+		  if (isset($data->error)) {
+		    echo '<p>There was an error retrieving the account information.</p>';
+		  } else {
+		    $account_id = $data[0
